@@ -1,30 +1,25 @@
-import random
-
 class core:
-    def __init__(self, combination):
+    def __init__(self, combination, randomCode, countRounds):
         self.lst = combination
-        self.score = 0
+        self.scorePlayer = 0
+        self.scoreAI = 0
+        self.random = randomCode
+        self.rounds = countRounds
+        print(randomCode)
 
     def checkWhichPlayStyle(self):
         return
 
-    def randomColorCombination(self):
-        '''Deze functie is er om een random combinatie te maken'''
-        global randomCodeGen
-        randomCodeGen = []
-        for i in range(0,4):
-            randomCode = random.randint(1, 6)
-            randomCodeGen.append(randomCode)
-        return randomCodeGen
-
     def checkColors(self):
         '''Deze functie is er om de kijken of de combinatie's gelijk zijn aan de combinatie die de computer heeft gemaakt'''
-        print(self.randomColorCombination())
-        if randomCodeGen == self.lst:
-            self.score += 1
-        else:
+        if self.random == self.lst:
+            self.scorePlayer += 1
+            return True
+        elif self.rounds <= 9:
             self.feedbackBlackColor()
             self.feedbackWhiteColor()
+        else:
+            self.scoreAI += 1
 
     def feedbackWhiteColor(self):
         '''Deze functie kijkt of de goede getallen zijn aan gegeven maar niet op de goede plek staan'''
@@ -35,11 +30,14 @@ class core:
         correctLst = []
         count = 0
         for i in self.lst:
-            if self.lst[count] == randomCodeGen[count]:
+            if self.lst[count] == self.random[count]:
                 correctLst.append(self.lst[count])
             count += 1
         print('Je hebt de ' + str(len(correctLst)) + ' goed op de goede plek')
 
     def saveScore(self):
         '''Deze functie is om bij te houden wat de score is'''
-        return self.score
+        lstPlayer = []
+        lstPlayer.append(self.scorePlayer)
+        print(len(lstPlayer))
+        return [self.scorePlayer, self.scoreAI]
