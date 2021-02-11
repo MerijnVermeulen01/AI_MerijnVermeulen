@@ -7,7 +7,7 @@ class core:
         self.rounds = countRounds
         print(randomCode)
 
-    def checkWhichPlayStyle(self):
+    def checkWhichPlayStyle(self): #TODO: zet hier vast commentaar, ook als het nog niet is geimplementeerd!
         return
 
     def checkColors(self):
@@ -33,7 +33,7 @@ class core:
             if self.lst[count] == self.random[count]:
                 correctLst.append(self.lst[count])
             count += 1
-        print('Je hebt de ' + str(len(correctLst)) + ' goed op de goede plek')
+        print('Je hebt de ' + str(len(correctLst)) + ' goed op de goede plek') #TODO: deze regel hoort hier volgens mij niet!
 
     def saveScore(self):
         '''Deze functie is om bij te houden wat de score is'''
