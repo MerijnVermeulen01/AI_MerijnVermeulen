@@ -1,43 +1,57 @@
+import random
 class core:
     def __init__(self, combination, randomCode, countRounds):
+        '''This is the constructor of the class'''
         self.lst = combination
         self.scorePlayer = 0
         self.scoreAI = 0
         self.random = randomCode
         self.rounds = countRounds
+        self.correctLst = []
+        self.feedbackList = []
+        print(self.feedbackList)
         print(randomCode)
 
     def checkWhichPlayStyle(self): #TODO: zet hier vast commentaar, ook als het nog niet is geimplementeerd!
+        ''''''
         return
 
     def checkColors(self):
-        '''Deze functie is er om de kijken of de combinatie's gelijk zijn aan de combinatie die de computer heeft gemaakt'''
+        '''This function is to look if the random combination is the same as the guessed combination'''
         if self.random == self.lst:
             self.scorePlayer += 1
             return True
         elif self.rounds <= 9:
-            self.feedbackBlackColor()
-            self.feedbackWhiteColor()
+            self.feedbackBlack()
         else:
             self.scoreAI += 1
 
-    def feedbackWhiteColor(self):
-        '''Deze functie kijkt of de goede getallen zijn aan gegeven maar niet op de goede plek staan'''
-        return
+    def feedbackBlack(self):
+        '''This fucntion looks if all/some of the numbers are on the same location and the same value'''
+        for i in range(0, 3):
+            if self.lst[i] == self.random[i]:
+                self.correctLst.append(self.lst[i])
+                self.feedbackList.append('B')
+            else:
+                self.correctLst.append(None)
+        self.feedbackWhite()
+        # return self.feedbackWhite()
 
-    def feedbackBlackColor(self):
-        '''Deze functie kijkt of de getallen op de correcte plek staan en of ze het goede nummer zijn'''
-        correctLst = []
-        count = 0
-        for i in self.lst:
-            if self.lst[count] == self.random[count]:
-                correctLst.append(self.lst[count])
-            count += 1
-        print('Je hebt de ' + str(len(correctLst)) + ' goed op de goede plek') #TODO: deze regel hoort hier volgens mij niet!
+    def feedbackWhite(self):
+        '''This function looks if all/some of the numbers are in the random combination'''
+        for i in range(0, 3):
+            if self.correctLst[i] == None:
+                if self.lst[i] in self.random:
+                    self.feedbackList.append('W')
+        random.shuffle(self.feedbackList)
+        print(self.feedbackList)
 
     def saveScore(self):
-        '''Deze functie is om bij te houden wat de score is'''
+        '''This function keeps the score'''
         lstPlayer = []
         lstPlayer.append(self.scorePlayer)
-        print(len(lstPlayer))
         return [self.scorePlayer, self.scoreAI]
+
+    def algorimte(self):
+        while self.feedbackList != ['B', 'B', 'B', 'B']:
+            return 'yeetus'
